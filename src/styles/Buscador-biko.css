@@ -1,0 +1,68 @@
+.title {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 65.76px;
+  line-height: 80px;
+}
+.subtitle {
+  font-family: "Courier Prime", monospace;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22.781px;
+  line-height: 32px;
+
+  color: #e73f39;
+}
+.normalText {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 22.7812px;
+  line-height: 32px;
+}
+.cardNameSurname {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20.25px;
+  line-height: 28px;
+}
+.cardRol {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.card-flip > div {
+  backface-visibility: hidden;
+  transition: transform 300ms;
+  transition-timing-function: linear;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+}
+
+.card-front {
+  transform: rotateY(0deg);
+  border-radius: 0.25rem;
+}
+
+.card-back {
+  background-color: #fedd27;
+  transform: rotateY(180deg);
+  position: absolute;
+  top: 0;
+  border-radius: 0.25rem;
+}
+
+.card-flip:hover .card-front {
+  transform: rotateY(-180deg);
+}
+
+.card-flip:hover .card-back {
+  transform: rotateY(0deg);
+}

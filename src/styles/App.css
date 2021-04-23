@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  position: absolute;
+  width: 120px;
+  height: 43.3px;
+  left: 144px;
+  top: 32px;
+}
+.App-header {
+  position: absolute;
+  width: 1440px;
+  height: 112px;
+  left: 0px;
+  top: 0px;
+}
