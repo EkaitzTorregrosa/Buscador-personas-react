@@ -2,6 +2,8 @@ import "../styles/Buscador-biko.css";
 import "bootstrap/dist/css/bootstrap.css";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Tabletop = require("tabletop");
 
@@ -26,8 +28,12 @@ export function BuscadorPersonas() {
       simpleSheet: true,
     });
   }
-
+  function handleSubmit(event: any) {
+    event.preventDefault();
+    searchPersons(event);
+  }
   function searchPersons(event: any) {
+    event.preventDefault();
     let searchingPersons: any[] = [];
 
     persons.forEach((person) => {
@@ -47,10 +53,11 @@ export function BuscadorPersonas() {
       setMsgError("No se han encontrado Bikonianos");
   }
   function personContains(person: any, property: string, event: any) {
+    event.preventDefault();
     return person[property]
       .toString()
       .toLowerCase()
-      .includes(event.target.value);
+      .includes(event.target.elements.buscador.value);
   }
 
   function printPersons(personsToPrint: any[]) {
@@ -62,7 +69,7 @@ export function BuscadorPersonas() {
               <div className="card-front">
                 <img
                   src={person["ImgUrl"]}
-                  className="card-img-top rounded mx-auto personImage"
+                  className="card-img-top rounded mx-auto"
                   alt="..."
                 />
               </div>
@@ -90,15 +97,24 @@ export function BuscadorPersonas() {
       <h1 className="title">Busca Bikonianos</h1>
       <p className="subtitle">(lorem ipsum dolor set)</p>
       <div className="row">
-        <div className="input-group col-8 mt-5 buscador">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Buscar..."
-            onChange={(event) => {
-              searchPersons(event);
-            }}
-          />
+        <div className="mt-5 col">
+          <form onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="col-6">
+                <input
+                  name="buscador"
+                  type="text"
+                  className="form-control"
+                  placeholder="Nombre Bikoniano"
+                />
+              </div>
+              <div className="col">
+                <button type="submit" className="btn btn-primary">
+                  <FontAwesomeIcon icon={faSearch} />
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
 

@@ -1,0 +1,14 @@
+@import url("./Fonts.css");
+.personImg {
+  position: absolute;
+  width: 45%;
+  height: 80%;
+  left: -6.57px;
+}
+.firsName {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 58.455px;
+  line-height: 72px;
+}

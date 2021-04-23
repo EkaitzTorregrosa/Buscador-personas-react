@@ -3,18 +3,20 @@ import "bootstrap/dist/css/bootstrap.css";
 import logoBiko from "./images/logo-biko.svg";
 import { BuscadorPersonas } from "./components/Buscador-personas";
 import { Details } from "./components/Details";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
     <div className="container">
       <header>
-        <img
-          className="img-fluid m-4"
-          src={logoBiko}
-          alt="logo biko"
-          style={{ width: "120px", height: "43.3px" }}
-        />
+        <a href="/">
+          <img
+            className="img-fluid m-4"
+            src={logoBiko}
+            alt="logo biko"
+            style={{ width: "120px", height: "43.3px" }}
+          />
+        </a>
       </header>
       <body>
         <BrowserRouter>

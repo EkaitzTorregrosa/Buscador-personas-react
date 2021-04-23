@@ -1,12 +1,13 @@
+@import url("./Fonts.css");
 .title {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: bold;
   font-size: 65.76px;
   line-height: 80px;
 }
 .subtitle {
-  font-family: "Courier Prime", monospace;
+  font-family: "Courier Prime";
   font-style: normal;
   font-weight: normal;
   font-size: 22.781px;
@@ -15,27 +16,28 @@
   color: #e73f39;
 }
 .normalText {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 300;
   font-size: 22.7812px;
   line-height: 32px;
 }
 .cardNameSurname {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: bold;
   font-size: 20.25px;
   line-height: 28px;
 }
 .cardRol {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 24px;
 }
 
+/*CARD ANIMATION*/
 .card-flip > div {
   backface-visibility: hidden;
   transition: transform 300ms;
