@@ -4,89 +4,111 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faRocket } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
 import { Link } from "react-router-dom";
 
 export function Details({ location }: any) {
-  const PERSON = location.state.persona;
-  const allPerson: any[] = location.state.allPersons;
+  const PERSON = location.state.onePerson;
+  const ALLPERSONS: any[] = location.state.allPersons;
+  const HABILITIES: any[] = PERSON["Habilidades"].split(", ");
+  console.log(HABILITIES);
 
-  function printPersonsSameTechnology() {
+  function printHabilities() {
+    return HABILITIES.map((hability: any) => {
+      return (
+        <p className="col roundedCircle redCircleContent mr-2">{hability}</p>
+      );
+    });
+  }
+  function printPersonsSameHabilities() {
+    return ALLPERSONS.map((person: any) => {
+      if (hasSameHabilities(person))
+        return (
+          <div className="col-sm-3">
+            <Link
+              to={{
+                pathname: "/details",
+                state: { onePerson: person, allPersons: ALLPERSONS },
+              }}
+            >
+              <div className="card border-light mt-2 card-flip">
+                <div className="card-front">
+                  <img
+                    src={person["ImgUrl"]}
+                    className="card-img-top rounded mx-auto"
+                    alt="..."
+                  />
+                </div>
+                <div className="card-back">
+                  <div className="card-body text-capitalize text-dark">
+                    <h5 className="card-title cardNameSurname">
+                      {person["Nombre"]}
+                    </h5>
+                    <h5 className="card-text cardNameSurname">
+                      {person["Apellidos"].split(" ")[0]}
+                    </h5>
+                    <p className="card-text cardText">{person["Rol"]}</p>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        );
+    });
+  }
+  function hasSameHabilities(person: any) {
+    let personHabilities: any[] = [];
+    person["Habilidades"].split(", ").map((hability: any) => {
+      personHabilities.push(hability.toLowerCase());
+    });
     return (
-      <div className="row">
-        <div className="col-sm-3">
-          <div className="card border-light mt-2 card-flip">
-            <div className="card-front">
-              <img
-                src={PERSON["ImgUrl"]}
-                className="card-img-top rounded mx-auto"
-                alt="..."
-              />
-            </div>
-            <div className="card-back">
-              <div className="card-body text-capitalize text-dark">
-                <h5 className="card-title cardNameSurname">Nombre</h5>
-                <h5 className="card-text cardNameSurname">Apellido</h5>
-                <p className="card-text cardText">Rol</p>
+      personHabilities.indexOf(HABILITIES[0].toLowerCase()) > -1 &&
+      person !== PERSON
+    );
+  }
+
+  function printTeamates() {
+    return ALLPERSONS.map((person: any) => {
+      if (hasSameTeam(person)) {
+        return (
+          <div className="col-sm-3">
+            <Link
+              to={{
+                pathname: "/details",
+                state: { onePerson: person, allPersons: ALLPERSONS },
+              }}
+            >
+              <div className="card border-light mt-2 card-flip">
+                <div className="card-front">
+                  <img
+                    src={person["ImgUrl"]}
+                    className="card-img-top rounded mx-auto"
+                    alt="..."
+                  />
+                </div>
+                <div className="card-back">
+                  <div className="card-body text-capitalize text-dark">
+                    <h5 className="card-title cardNameSurname">
+                      {person["Nombre"].toLowerCase()}
+                    </h5>
+                    <h5 className="card-text cardNameSurname">
+                      {person["Apellidos"].toLowerCase()}
+                    </h5>
+                    <p className="card-text cardText">
+                      {person["Rol"].toLowerCase()}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
-        </div>
-        <div className="col-sm-3">
-          <div className="card border-light mt-2 card-flip">
-            <div className="card-front">
-              <img
-                src={PERSON["ImgUrl"]}
-                className="card-img-top rounded mx-auto"
-                alt="..."
-              />
-            </div>
-            <div className="card-back">
-              <div className="card-body text-capitalize text-dark">
-                <h5 className="card-title cardNameSurname">Nombre</h5>
-                <h5 className="card-text cardNameSurname">Apellido</h5>
-                <p className="card-text cardText">Rol</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-sm-3">
-          <div className="card border-light mt-2 card-flip">
-            <div className="card-front">
-              <img
-                src={PERSON["ImgUrl"]}
-                className="card-img-top rounded mx-auto"
-                alt="..."
-              />
-            </div>
-            <div className="card-back">
-              <div className="card-body text-capitalize text-dark">
-                <h5 className="card-title cardNameSurname">Nombre</h5>
-                <h5 className="card-text cardNameSurname">Apellido</h5>
-                <p className="card-text cardText">Rol</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-sm-3">
-          <div className="card border-light mt-2 card-flip">
-            <div className="card-front">
-              <img
-                src={PERSON["ImgUrl"]}
-                className="card-img-top rounded mx-auto"
-                alt="..."
-              />
-            </div>
-            <div className="card-back">
-              <div className="card-body text-capitalize text-dark">
-                <h5 className="card-title cardNameSurname">Nombre</h5>
-                <h5 className="card-text cardNameSurname">Apellido</h5>
-                <p className="card-text cardText">Rol</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        );
+      }
+    });
+  }
+  function hasSameTeam(person: any) {
+    return (
+      person["Equipo"].toLowerCase() === PERSON["Equipo"].toLowerCase() &&
+      person !== PERSON
     );
   }
   function printBlog() {
@@ -145,45 +167,6 @@ export function Details({ location }: any) {
       </div>
     );
   }
-  function printTeamates() {
-    return allPerson.map((person: any) => {
-      if (person["Equipo"].toLowerCase() === PERSON["Equipo"].toLowerCase()) {
-        return (
-          <div className="col-sm-3">
-            <Link
-              to={{
-                pathname: "/details",
-                state: { persona: person, allPersons: allPerson },
-              }}
-            >
-              <div className="card border-light mt-2 card-flip">
-                <div className="card-front">
-                  <img
-                    src={person["ImgUrl"]}
-                    className="card-img-top rounded mx-auto"
-                    alt="..."
-                  />
-                </div>
-                <div className="card-back">
-                  <div className="card-body text-capitalize text-dark">
-                    <h5 className="card-title cardNameSurname">
-                      {person["Nombre"].toLowerCase()}
-                    </h5>
-                    <h5 className="card-text cardNameSurname">
-                      {person["Apellidos"].toLowerCase()}
-                    </h5>
-                    <p className="card-text cardText">
-                      {person["Rol"].toLowerCase()}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
-        );
-      }
-    });
-  }
   return (
     <div className="container">
       <div className="row">
@@ -213,22 +196,20 @@ export function Details({ location }: any) {
                 : "sin concretar"}
             </span>
           </p>
-          <div className="row">
-            <p className="col roundedCircle redCircleContent mr-2">React</p>
-            <p className="col roundedCircle redCircleContent mr-2">Symphony</p>
-            <p className="col roundedCircle redCircleContent mr-2">Drupal</p>
-            <p className="col roundedCircle redCircleContent mr-2">
-              componetización
-            </p>
-          </div>
+
+          <div className="row">{printHabilities()}</div>
 
           <p className="normalText">{PERSON["Sobre mí"]}</p>
         </div>
       </div>
-      <div className="row" style={{ marginTop: "20rem" }}>
-        <h1 className="normalText font-weight-bold ml-3">Miembros de React</h1>
-      </div>
-      {printPersonsSameTechnology()}
+      <h1
+        className="normalText font-weight-bold ml-3"
+        style={{ marginTop: "20rem" }}
+      >
+        Miembros de <span className="text-capitalize">{HABILITIES[0]}</span>
+      </h1>
+      <div className="row">{printPersonsSameHabilities()}</div>
+
       <h1 className="normalText font-weight-bold mt-5">Contamos en el blog</h1>
       <p className="subtitle">(y mucho más que proyectos)</p>
       {printBlog()}

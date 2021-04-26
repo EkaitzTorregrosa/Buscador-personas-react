@@ -67,7 +67,7 @@ export function BuscadorPersonas() {
           <Link
             to={{
               pathname: "/details",
-              state: { persona: person, allPersons: persons },
+              state: { onePerson: person, allPersons: persons },
             }}
           >
             <div className="card border-light mt-2 card-flip">
