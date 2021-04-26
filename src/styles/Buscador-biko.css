@@ -19,7 +19,7 @@
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 300;
-  font-size: 22.7812px;
+  font-size: 22.78px;
   line-height: 32px;
 }
 .cardNameSurname {
@@ -29,12 +29,16 @@
   font-size: 20.25px;
   line-height: 28px;
 }
-.cardRol {
+.cardText {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 300;
   font-size: 16px;
   line-height: 24px;
+}
+.searchBtn {
+  color: white;
+  background: #e73f39;
 }
 
 /*CARD ANIMATION*/

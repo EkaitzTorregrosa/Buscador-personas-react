@@ -64,7 +64,12 @@ export function BuscadorPersonas() {
     return personsToPrint.map((person) => {
       return (
         <div className="col-sm-3">
-          <Link to={{ pathname: "/details", state: { persona: person } }}>
+          <Link
+            to={{
+              pathname: "/details",
+              state: { persona: person, allPersons: persons },
+            }}
+          >
             <div className="card border-light mt-2 card-flip">
               <div className="card-front">
                 <img
@@ -81,7 +86,7 @@ export function BuscadorPersonas() {
                   <h5 className="card-text cardNameSurname">
                     {person["Apellidos"].toLowerCase()}
                   </h5>
-                  <p className="card-text cardRol">
+                  <p className="card-text cardText">
                     {person["Rol"].toLowerCase()}
                   </p>
                 </div>
@@ -97,6 +102,15 @@ export function BuscadorPersonas() {
       <h1 className="title">Busca Bikonianos</h1>
       <p className="subtitle">(lorem ipsum dolor set)</p>
       <div className="row">
+        <div className="col-7">
+          <p className="normalText">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vitae
+            pretium tellus.{" "}
+          </p>
+        </div>
+        <div className="col"></div>
+      </div>
+      <div className="row">
         <div className="mt-5 col">
           <form onSubmit={handleSubmit}>
             <div className="row">
@@ -109,7 +123,7 @@ export function BuscadorPersonas() {
                 />
               </div>
               <div className="col">
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn searchBtn">
                   <FontAwesomeIcon icon={faSearch} />
                 </button>
               </div>

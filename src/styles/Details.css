@@ -2,7 +2,7 @@
 .personImg {
   position: absolute;
   width: 45%;
-  height: 80%;
+  height: 83.25%;
   left: -6.57px;
 }
 .firsName {
@@ -11,4 +11,37 @@
   font-weight: 300;
   font-size: 58.455px;
   line-height: 72px;
+}
+
+.roundedCircle {
+  display: flex;
+  justify-content: center;
+  width: 110px;
+  height: 32px;
+  background: #ffffff;
+  border: 1px solid #e73f39;
+  box-sizing: border-box;
+  border-radius: 29px;
+}
+.redCircleContent {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 28px;
+  color: #e73f39;
+}
+.blogTitle {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20.25px;
+  line-height: 28px;
+}
+.blogAuthor {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12.642px;
+  line-height: 20px;
 }
