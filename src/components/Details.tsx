@@ -9,106 +9,75 @@ import { Link } from "react-router-dom";
 export function Details({ location }: any) {
   const PERSON = location.state.onePerson;
   const ALLPERSONS: any[] = location.state.allPersons;
-  const HABILITIES: any[] = PERSON["Habilidades"].split(", ");
-  console.log(HABILITIES);
+  const ABILITIES: any[] = PERSON["Habilidades"].split(", ");
 
-  function printHabilities() {
-    return HABILITIES.map((hability: any) => {
+  function printabilities() {
+    return ABILITIES.map((ability: any) => {
       return (
-        <p className="col roundedCircle redCircleContent mr-2">{hability}</p>
+        <p className="col roundedCircle redCircleContent mr-2">{ability}</p>
       );
     });
   }
-  function printPersonsSameHabilities() {
+  function printPersonsSameAbilities() {
     return ALLPERSONS.map((person: any) => {
-      if (hasSameHabilities(person))
-        return (
-          <div className="col-sm-3">
-            <Link
-              to={{
-                pathname: "/details",
-                state: { onePerson: person, allPersons: ALLPERSONS },
-              }}
-            >
-              <div className="card border-light mt-2 card-flip">
-                <div className="card-front">
-                  <img
-                    src={person["ImgUrl"]}
-                    className="card-img-top rounded mx-auto"
-                    alt="..."
-                  />
-                </div>
-                <div className="card-back">
-                  <div className="card-body text-capitalize text-dark">
-                    <h5 className="card-title cardNameSurname">
-                      {person["Nombre"]}
-                    </h5>
-                    <h5 className="card-text cardNameSurname">
-                      {person["Apellidos"].split(" ")[0]}
-                    </h5>
-                    <p className="card-text cardText">{person["Rol"]}</p>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
-        );
+      if (hasSameAbilities(person)) return printPerson(person);
     });
   }
-  function hasSameHabilities(person: any) {
-    let personHabilities: any[] = [];
-    person["Habilidades"].split(", ").map((hability: any) => {
-      personHabilities.push(hability.toLowerCase());
+  function hasSameAbilities(person: any) {
+    let personabilities: any[] = [];
+    person["Habilidades"].split(", ").forEach((ability: any) => {
+      personabilities.push(ability.toLowerCase());
     });
     return (
-      personHabilities.indexOf(HABILITIES[0].toLowerCase()) > -1 &&
+      personabilities.indexOf(ABILITIES[0].toLowerCase()) > -1 &&
       person !== PERSON
     );
   }
 
   function printTeamates() {
     return ALLPERSONS.map((person: any) => {
-      if (hasSameTeam(person)) {
-        return (
-          <div className="col-sm-3">
-            <Link
-              to={{
-                pathname: "/details",
-                state: { onePerson: person, allPersons: ALLPERSONS },
-              }}
-            >
-              <div className="card border-light mt-2 card-flip">
-                <div className="card-front">
-                  <img
-                    src={person["ImgUrl"]}
-                    className="card-img-top rounded mx-auto"
-                    alt="..."
-                  />
-                </div>
-                <div className="card-back">
-                  <div className="card-body text-capitalize text-dark">
-                    <h5 className="card-title cardNameSurname">
-                      {person["Nombre"].toLowerCase()}
-                    </h5>
-                    <h5 className="card-text cardNameSurname">
-                      {person["Apellidos"].toLowerCase()}
-                    </h5>
-                    <p className="card-text cardText">
-                      {person["Rol"].toLowerCase()}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
-        );
-      }
+      if (hasSameTeam(person)) return printPerson(person);
     });
   }
   function hasSameTeam(person: any) {
     return (
       person["Equipo"].toLowerCase() === PERSON["Equipo"].toLowerCase() &&
       person !== PERSON
+    );
+  }
+  function printPerson(person: any) {
+    return (
+      <div className="col-sm-3">
+        <Link
+          to={{
+            pathname: "/details",
+            state: { onePerson: person, allPersons: ALLPERSONS },
+          }}
+        >
+          <div className="card border-light mt-2 card-flip">
+            <div className="card-front">
+              <img
+                src={person["ImgUrl"]}
+                className="card-img-top rounded mx-auto"
+                alt="..."
+              />
+            </div>
+            <div className="card-back">
+              <div className="card-body text-capitalize text-dark">
+                <h5 className="card-title cardNameSurname">
+                  {person["Nombre"].toLowerCase()}
+                </h5>
+                <h5 className="card-text cardNameSurname">
+                  {person["Apellidos"].toLowerCase()}
+                </h5>
+                <p className="card-text cardText">
+                  {person["Rol"].toLowerCase()}
+                </p>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
     );
   }
   function printBlog() {
@@ -197,7 +166,7 @@ export function Details({ location }: any) {
             </span>
           </p>
 
-          <div className="row">{printHabilities()}</div>
+          <div className="row">{printabilities()}</div>
 
           <p className="normalText">{PERSON["Sobre mí"]}</p>
         </div>
@@ -206,9 +175,9 @@ export function Details({ location }: any) {
         className="normalText font-weight-bold ml-3"
         style={{ marginTop: "20rem" }}
       >
-        Miembros de <span className="text-capitalize">{HABILITIES[0]}</span>
+        Miembros de <span className="text-capitalize">{ABILITIES[0]}</span>
       </h1>
-      <div className="row">{printPersonsSameHabilities()}</div>
+      <div className="row">{printPersonsSameAbilities()}</div>
 
       <h1 className="normalText font-weight-bold mt-5">Contamos en el blog</h1>
       <p className="subtitle">(y mucho más que proyectos)</p>

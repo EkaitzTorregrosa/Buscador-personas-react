@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import logoBiko from "./images/logo-biko.svg";
 import { BuscadorPersonas } from "./components/Buscador-personas";
 import { Details } from "./components/Details";
-import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   return (

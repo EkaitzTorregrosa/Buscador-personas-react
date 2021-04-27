@@ -41,7 +41,8 @@ export function BuscadorPersonas() {
         personContains(person, "Nombre", event) ||
         personContains(person, "Apellidos", event) ||
         personContains(person, "Equipo", event) ||
-        personContains(person, "Rol", event)
+        personContains(person, "Rol", event) ||
+        personContains(person, "Habilidades", event)
       ) {
         searchingPersons.push(person);
         setHasValue(true);
