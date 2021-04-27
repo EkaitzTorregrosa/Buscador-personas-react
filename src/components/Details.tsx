@@ -5,17 +5,39 @@ import "bootstrap/dist/css/bootstrap.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faRocket } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export function Details({ location }: any) {
   const PERSON = location.state.onePerson;
   const ALLPERSONS: any[] = location.state.allPersons;
   const ABILITIES: any[] = PERSON["Habilidades"].split(", ");
+  const [abilityToSearch, setAbilityToSearch] = useState(
+    ABILITIES[0].toLowerCase()
+  );
 
   function printabilities() {
     return ABILITIES.map((ability: any) => {
-      return (
-        <p className="col roundedCircle redCircleContent mr-2">{ability}</p>
-      );
+      if (abilityToSearch === ability.toLowerCase()) {
+        return (
+          <div
+            className="col roundedCircleAbilitySelected mr-2"
+            style={{ background: "e73f39" }}
+          >
+            {ability}
+          </div>
+        );
+      } else {
+        return (
+          <div
+            className="col roundedCircleAbility mr-2"
+            onClick={() => {
+              setAbilityToSearch(ability.toLowerCase());
+            }}
+          >
+            {ability}
+          </div>
+        );
+      }
     });
   }
   function printPersonsSameAbilities() {
@@ -28,10 +50,7 @@ export function Details({ location }: any) {
     person["Habilidades"].split(", ").forEach((ability: any) => {
       personabilities.push(ability.toLowerCase());
     });
-    return (
-      personabilities.indexOf(ABILITIES[0].toLowerCase()) > -1 &&
-      person !== PERSON
-    );
+    return personabilities.indexOf(abilityToSearch) > -1 && person !== PERSON;
   }
 
   function printTeamates() {
@@ -175,7 +194,7 @@ export function Details({ location }: any) {
         className="normalText font-weight-bold ml-3"
         style={{ marginTop: "20rem" }}
       >
-        Miembros de <span className="text-capitalize">{ABILITIES[0]}</span>
+        Miembros de <span className="text-capitalize">{abilityToSearch}</span>
       </h1>
       <div className="row">{printPersonsSameAbilities()}</div>
 
