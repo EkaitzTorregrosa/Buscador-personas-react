@@ -74,7 +74,7 @@ export function BuscadorPersonas() {
               state: { onePerson: person, allPersons: persons },
             }}
           >
-            <div className="card border-light mt-2 card-flip">
+            <div className="card border-0 mt-4 card-flip">
               <div className="card-front">
                 <img
                   src={person["ImgUrl"]}
@@ -102,7 +102,11 @@ export function BuscadorPersonas() {
     });
   }
   return (
-    <div className="container">
+    <div className="container mt-5 ">
+      <div className="row">
+        <div className="col"></div>
+        <div className="backGroundImg col" />
+      </div>
       <h1 className="title">Busca Bikonianos</h1>
       <p className="subtitle">(lorem ipsum dolor set)</p>
       <div className="row">
@@ -118,18 +122,18 @@ export function BuscadorPersonas() {
         <div className="mt-5 mb-3 col">
           <form onSubmit={handleSubmit}>
             <div className="row">
-              <div className="col-6">
-                <input
-                  name="buscador"
-                  type="text"
-                  className="form-control"
-                  placeholder="Nombre Bikoniano"
-                />
-              </div>
-              <div className="col">
-                <button type="submit" className="btn searchBtn">
-                  <FontAwesomeIcon icon={faSearch} />
-                </button>
+              <div className="col-8">
+                <div className="input-group mb-3 ">
+                  <input
+                    name="buscador"
+                    type="text"
+                    className="form-control rounded-0"
+                    placeholder="Nombre Bikoniano"
+                  />
+                  <button type="submit" className="btn searchBtn rounded-0">
+                    <FontAwesomeIcon icon={faSearch} />
+                  </button>
+                </div>
               </div>
             </div>
           </form>

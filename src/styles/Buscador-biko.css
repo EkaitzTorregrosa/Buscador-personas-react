@@ -72,3 +72,13 @@
 .card-flip:hover .card-back {
   transform: rotateY(0deg);
 }
+.backGroundImg {
+  position: absolute;
+  width: 50%;
+  height: 700px;
+  left: 50%;
+  top: 200px;
+
+  background: url(https://s3-alpha-sig.figma.com/img/8157/b9c3/073ea9030f747b2194ba13d3e29187c4?Expires=1620604800&Signature=K3HQF1TY47lBTwfWcKWfrCKcpm6djRdurevBb4eiCY9WsfC12AazHxhapYiE8d5bY45uI0-HoC~FDRyvCyUGv3ssB2auQvQcgz~jWCMZ6peqXWwjogwbled~dLFlHY3N6gFjmOFIenRamkJwCkUbJvlQ-Ox0GVpJU0A0SFd1PWRqBM-BwqQJTLPq1GGxApx76JbGxbQbQQaTLvLTye~bcB1J3f2q2AS1Dlg0h9KPr6P9UCzhXXV7UdzRcDTgW5UCjYTGsuxE9oAJ47E0Fe5xbEwko3wPFbLUJnDW7TnxZWNfITHXeJsrLM1kY~ure7iS-AktahEtLbQ4rqLSgXFYXQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA);
+  background-size: cover;
+}

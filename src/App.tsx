@@ -10,12 +10,7 @@ function App() {
     <div className="container">
       <header>
         <a href="/">
-          <img
-            className="img-fluid m-4"
-            src={logoBiko}
-            alt="logo biko"
-            style={{ width: "120px", height: "43.3px" }}
-          />
+          <img className="img-fluid ml-3 logo" src={logoBiko} alt="logo biko" />
         </a>
       </header>
       <body>
