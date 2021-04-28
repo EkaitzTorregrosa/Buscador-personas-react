@@ -1,6 +1,6 @@
 import "../styles/Buscador-biko.css";
 import "bootstrap/dist/css/bootstrap.css";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
