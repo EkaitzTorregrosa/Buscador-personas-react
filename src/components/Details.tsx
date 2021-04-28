@@ -5,15 +5,23 @@ import "bootstrap/dist/css/bootstrap.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar, faRocket } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Details({ location }: any) {
+  try {
+  } catch (error) {}
   const PERSON = location.state.onePerson;
   const ALLPERSONS: any[] = location.state.allPersons;
   const ABILITIES: any[] = PERSON["Habilidades"].split(", ");
   const [abilityToSearch, setAbilityToSearch] = useState(
     ABILITIES[0].toLowerCase()
   );
+  const [isOtherPerson, setIsOtherPerson] = useState(false);
+  useEffect(() => {
+    if (isOtherPerson) setAbilityToSearch(ABILITIES[0].toLowerCase());
+    window.scrollTo(0, 0);
+    setIsOtherPerson(false);
+  }, [isOtherPerson]);
 
   function printabilities() {
     return ABILITIES.map((ability: any) => {
@@ -72,6 +80,7 @@ export function Details({ location }: any) {
             pathname: "/details",
             state: { onePerson: person, allPersons: ALLPERSONS },
           }}
+          onClick={() => setIsOtherPerson(true)}
         >
           <div className="card border-light mt-2 card-flip">
             <div className="card-front">

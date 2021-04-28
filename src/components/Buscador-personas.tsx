@@ -16,7 +16,9 @@ export function BuscadorPersonas() {
   const [msgError, setMsgError] = useState("");
 
   useEffect(() => {
-    if (!hasValue) getDataFromSpreadsheet();
+    if (!hasValue) {
+      getDataFromSpreadsheet();
+    }
   }, [hasValue]);
 
   function getDataFromSpreadsheet() {
@@ -45,13 +47,14 @@ export function BuscadorPersonas() {
         personContains(person, "Habilidades", event)
       ) {
         searchingPersons.push(person);
-        setHasValue(true);
         setMsgError("");
       }
       setSearchedPersons(searchingPersons);
     });
     if (searchingPersons.length === 0)
       setMsgError("No se han encontrado Bikonianos");
+
+    setHasValue(true);
   }
   function personContains(person: any, property: string, event: any) {
     event.preventDefault();
@@ -112,7 +115,7 @@ export function BuscadorPersonas() {
         <div className="col"></div>
       </div>
       <div className="row">
-        <div className="mt-5 col">
+        <div className="mt-5 mb-3 col">
           <form onSubmit={handleSubmit}>
             <div className="row">
               <div className="col-6">
@@ -133,7 +136,6 @@ export function BuscadorPersonas() {
         </div>
       </div>
 
-      <br />
       <div className="row">
         {!hasValue ? printPersons(persons) : printPersons(searchedPersons)}
       </div>

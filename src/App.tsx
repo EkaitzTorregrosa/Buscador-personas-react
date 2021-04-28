@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import logoBiko from "./images/logo-biko.svg";
 import { BuscadorPersonas } from "./components/Buscador-personas";
 import { Details } from "./components/Details";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
@@ -22,7 +22,18 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={BuscadorPersonas} />
-            <Route path="/details" component={Details} />
+            <Route exact path="/details" component={Details} />
+            <Route path="/*">
+              <div className="alert alert-danger mt-5" role="alert">
+                <p>
+                  La página a la que intenta acceder no existe o no se encuentra
+                  disponible.
+                </p>
+                <Link to="/" className="btn btn-primary mt-2">
+                  Volver a inicio
+                </Link>
+              </div>
+            </Route>
           </Switch>
         </BrowserRouter>
       </body>
