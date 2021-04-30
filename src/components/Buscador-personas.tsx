@@ -8,22 +8,22 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const Tabletop = require("tabletop");
 
 export function BuscadorPersonas() {
-  const URL: string =
+  const URLSpreadsheet: string =
     "https://docs.google.com/spreadsheets/d/1xpUgqzcmSTmIVcY5OTvB-FGGuVm9Chc9WSk2ZLmLY1E/edit?usp=sharing";
   const [persons, setPersons] = useState<any[]>([]);
   const [searchedPersons, setSearchedPersons] = useState<any[]>([]);
-  const [hasValue, setHasValue] = useState(false);
+  const [hasSearchedPersons, setHasValue] = useState(false);
   const [msgError, setMsgError] = useState("");
 
   useEffect(() => {
-    if (!hasValue) {
+    if (!hasSearchedPersons) {
       getDataFromSpreadsheet();
     }
-  }, [hasValue]);
+  }, [hasSearchedPersons]);
 
   function getDataFromSpreadsheet() {
     Tabletop.init({
-      key: URL,
+      key: URLSpreadsheet,
       callback: (googleData: any) => {
         setPersons(googleData);
       },
@@ -61,7 +61,7 @@ export function BuscadorPersonas() {
     return person[property]
       .toString()
       .toLowerCase()
-      .includes(event.target.elements.buscador.value);
+      .includes(event.target.elements.buscador.value.toLowerCase());
   }
 
   function printPersons(personsToPrint: any[]) {
@@ -141,7 +141,9 @@ export function BuscadorPersonas() {
       </div>
 
       <div className="row">
-        {!hasValue ? printPersons(persons) : printPersons(searchedPersons)}
+        {!hasSearchedPersons
+          ? printPersons(persons)
+          : printPersons(searchedPersons)}
       </div>
       <p>{msgError}</p>
     </div>
