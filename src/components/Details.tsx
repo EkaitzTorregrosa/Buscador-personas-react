@@ -80,9 +80,8 @@ export function Details({ location }: any) {
             pathname: "/details",
             state: { onePerson: person, allPersons: ALLPERSONS },
           }}
-          onClick={() => setIsOtherPerson(true)}
         >
-          <div className="card border-0 mt-2 card-flip">
+          <div className="card border-0 mt-4 card-flip">
             <div className="card-front">
               <img
                 src={person["ImgUrl"]}

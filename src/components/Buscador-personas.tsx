@@ -6,20 +6,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Tabletop = require("tabletop");
+let searchedPersons: any[];
 
 export function BuscadorPersonas() {
   const URLSpreadsheet: string =
     "https://docs.google.com/spreadsheets/d/1xpUgqzcmSTmIVcY5OTvB-FGGuVm9Chc9WSk2ZLmLY1E/edit?usp=sharing";
   const [persons, setPersons] = useState<any[]>([]);
-  const [searchedPersons, setSearchedPersons] = useState<any[]>([]);
-  const [hasSearchedPersons, setHasValue] = useState(false);
   const [msgError, setMsgError] = useState("");
+  const [hasPersons, setHasSearchedPersons] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
-    if (!hasSearchedPersons) {
-      getDataFromSpreadsheet();
-    }
-  }, [hasSearchedPersons]);
+    if (!hasPersons) getDataFromSpreadsheet();
+
+    if (searchInput !== "") searchedPersons = searchPersons();
+  }, [hasPersons, searchInput]);
 
   function getDataFromSpreadsheet() {
     Tabletop.init({
@@ -32,36 +33,36 @@ export function BuscadorPersonas() {
   }
   function handleSubmit(event: any) {
     event.preventDefault();
-    searchPersons(event);
+    setSearchInput(event.target.elements.buscador.value);
+    setHasSearchedPersons(false);
   }
-  function searchPersons(event: any) {
-    event.preventDefault();
+  function searchPersons(): any[] {
     let searchingPersons: any[] = [];
 
     persons.forEach((person) => {
       if (
-        personContains(person, "Nombre", event) ||
-        personContains(person, "Apellidos", event) ||
-        personContains(person, "Equipo", event) ||
-        personContains(person, "Rol", event) ||
-        personContains(person, "Habilidades", event)
+        personContains(person, "Nombre") ||
+        personContains(person, "Apellidos") ||
+        personContains(person, "Equipo") ||
+        personContains(person, "Rol") ||
+        personContains(person, "Habilidades")
       ) {
         searchingPersons.push(person);
         setMsgError("");
       }
-      setSearchedPersons(searchingPersons);
+      //setSearchedPersons(searchingPersons);
     });
     if (searchingPersons.length === 0)
       setMsgError("No se han encontrado Bikonianos");
 
-    setHasValue(true);
+    setHasSearchedPersons(true);
+    return searchingPersons;
   }
-  function personContains(person: any, property: string, event: any) {
-    event.preventDefault();
+  function personContains(person: any, property: string) {
     return person[property]
       .toString()
       .toLowerCase()
-      .includes(event.target.elements.buscador.value.toLowerCase());
+      .includes(searchInput.toLocaleLowerCase());
   }
 
   function printPersons(personsToPrint: any[]) {
@@ -141,9 +142,7 @@ export function BuscadorPersonas() {
       </div>
 
       <div className="row">
-        {!hasSearchedPersons
-          ? printPersons(persons)
-          : printPersons(searchedPersons)}
+        {!hasPersons ? printPersons(persons) : printPersons(searchedPersons)}
       </div>
       <p>{msgError}</p>
     </div>
