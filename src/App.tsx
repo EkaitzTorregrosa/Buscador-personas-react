@@ -19,7 +19,11 @@ function App() {
             <Route exact path="/" component={BuscadorPersonas} />
             <Route exact path="/details" component={Details} />
             <Route path="/*">
-              <div className="alert alert-danger mt-5" role="alert">
+              <div
+                className="alert alert-danger"
+                role="alert"
+                style={{ marginTop: "10rem" }}
+              >
                 <p>
                   La página a la que intenta acceder no existe o no se encuentra
                   disponible.
