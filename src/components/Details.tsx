@@ -8,8 +8,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export function Details({ location }: any) {
-  try {
-  } catch (error) {}
   const PERSON = location.state.onePerson;
   const ALLPERSONS: any[] = location.state.allPersons;
   const ABILITIES: any[] = PERSON["Habilidades"].split(", ");
@@ -21,7 +19,7 @@ export function Details({ location }: any) {
     if (isOtherPerson) setAbilityToSearch(ABILITIES[0].toLowerCase());
     window.scrollTo(0, 0);
     setIsOtherPerson(false);
-  }, [isOtherPerson]);
+  }, [isOtherPerson, ABILITIES]);
 
   function printabilities() {
     return ABILITIES.map((ability: any) => {

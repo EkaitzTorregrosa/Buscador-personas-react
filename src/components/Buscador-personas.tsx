@@ -6,23 +6,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Tabletop = require("tabletop");
-let searchedPersons: any[];
 
 export function BuscadorPersonas() {
   const URLSpreadsheet: string =
     "https://docs.google.com/spreadsheets/d/1xpUgqzcmSTmIVcY5OTvB-FGGuVm9Chc9WSk2ZLmLY1E/edit?usp=sharing";
   const [persons, setPersons] = useState<any[]>([]);
-  const [msgError, setMsgError] = useState("");
-  const [hasPersons, setHasSearchedPersons] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
-    if (!hasPersons) getDataFromSpreadsheet();
+    getDataFromSpreadsheet();
+  }, [searchInput]);
 
-    if (searchInput !== "") searchedPersons = searchPersons();
-  }, [hasPersons, searchInput]);
-
-  function getDataFromSpreadsheet() {
+  function getDataFromSpreadsheet(): any {
     Tabletop.init({
       key: URLSpreadsheet,
       callback: (googleData: any) => {
@@ -34,7 +29,6 @@ export function BuscadorPersonas() {
   function handleSubmit(event: any) {
     event.preventDefault();
     setSearchInput(event.target.elements.buscador.value);
-    setHasSearchedPersons(false);
   }
   function searchPersons(): any[] {
     let searchingPersons: any[] = [];
@@ -48,14 +42,9 @@ export function BuscadorPersonas() {
         personContains(person, "Habilidades")
       ) {
         searchingPersons.push(person);
-        setMsgError("");
       }
-      //setSearchedPersons(searchingPersons);
     });
-    if (searchingPersons.length === 0)
-      setMsgError("No se han encontrado Bikonianos");
 
-    setHasSearchedPersons(true);
     return searchingPersons;
   }
   function personContains(person: any, property: string) {
@@ -64,8 +53,18 @@ export function BuscadorPersonas() {
       .toLowerCase()
       .includes(searchInput.toLocaleLowerCase());
   }
+  function arePersonsNotFound() {
+    return searchInput !== "" && searchPersons().length === 0;
+  }
 
-  function printPersons(personsToPrint: any[]) {
+  function printPersons() {
+    let personsToPrint: any[];
+    if (searchPersons().length === 0) {
+      personsToPrint = persons;
+    } else {
+      personsToPrint = searchPersons();
+    }
+
     return personsToPrint.map((person) => {
       return (
         <div className="col-sm-3">
@@ -141,10 +140,11 @@ export function BuscadorPersonas() {
         </div>
       </div>
 
-      <div className="row">
-        {!hasPersons ? printPersons(persons) : printPersons(searchedPersons)}
-      </div>
-      <p>{msgError}</p>
+      {arePersonsNotFound() ? (
+        <p>No se han encontrado Bikonianos</p>
+      ) : (
+        <div className="row">{printPersons()}</div>
+      )}
     </div>
   );
 }
